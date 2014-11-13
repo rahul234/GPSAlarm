@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:paddingBottom="@dimen/large_margin" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:text="@string/locationAlarm"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:id="@+id/loactionLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/title"
+            android:layout_below="@+id/title"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/loactionDetails"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_custom"
+                android:inputType="text"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:clickable="true"
+                android:onClick="onSearchClicked"
+                android:src="@android:drawable/ic_menu_search" >
+            </ImageView>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/loactionDistace"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/title"
+            android:layout_below="@+id/loactionLayout"
+            android:background="@drawable/edittext_custom"
+            android:inputType="text" />
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
