@@ -3,5 +3,6 @@
 
     <color name="headerColor">#2c3d4a</color>
     <color name="dividerColor">#5c7081</color>
+    <color name="backgroundColor">#1083b8</color>
 
 </resources>

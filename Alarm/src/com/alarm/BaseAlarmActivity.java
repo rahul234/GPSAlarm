@@ -1,5 +1,7 @@
 package com.alarm;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.app.FragmentActivity;
@@ -14,20 +16,15 @@ public abstract class BaseAlarmActivity extends FragmentActivity {
 		finish();
 	}
 
-	protected AlarmDetails retriveData(AlarmDetails details) {
-		SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
-		Gson gson = new Gson();
-		String json = mPrefs.getString("AlarmDetails", "");
-		AlarmDetails obj = gson.fromJson(json, AlarmDetails.class);
-		return obj;
-	}
-
+	
 	protected void saveData(AlarmDetails details) {
-		SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+		SharedPreferences mPrefs = getSharedPreferences("AlarmDetails",Context.MODE_PRIVATE);
 		Editor prefsEditor = mPrefs.edit();
 		Gson gson = new Gson();
 		String json = gson.toJson(details);
 		prefsEditor.putString("AlarmDetails", json);
 		prefsEditor.commit();
+		Intent i = new Intent(this, MainActivity.class);
+		startActivity(i);
 	}
 }

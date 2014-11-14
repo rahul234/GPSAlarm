@@ -54,7 +54,8 @@
             android:layout_alignLeft="@+id/title"
             android:layout_below="@+id/loactionLayout"
             android:background="@drawable/edittext_custom"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
     <fragment

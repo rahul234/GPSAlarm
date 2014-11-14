@@ -12,14 +12,14 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alarm.framework.AlarmTypeList;
+import com.alarm.framework.AlarmDetails;
 
 public class CustomAdapter implements ExpandableListAdapter {
 
 	private final Activity activity;
-	private final List<AlarmTypeList> alarmTypeList;
+	private final List<AlarmDetails> alarmTypeList;
 
-	public CustomAdapter(Activity activity, List<AlarmTypeList> alarmTypeList) {
+	public CustomAdapter(Activity activity, List<AlarmDetails> alarmTypeList) {
 		this.activity = activity;
 		this.alarmTypeList = alarmTypeList;
 	}
