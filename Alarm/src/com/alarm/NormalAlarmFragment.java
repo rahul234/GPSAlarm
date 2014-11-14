@@ -2,6 +2,10 @@ package com.alarm;
 
 import java.util.Calendar;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -20,6 +24,9 @@ public class NormalAlarmFragment extends BaseAlarmFragment {
 	private int hour;
 	private int minute;
 	private String time="";
+	protected int selectedHour;
+	protected int selectedminute;
+	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -37,10 +44,10 @@ public class NormalAlarmFragment extends BaseAlarmFragment {
 			
 			@Override
 			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-				int selectedHour = hourOfDay;
-				int selectedminute = minute;
-				time = new StringBuilder().append(pad(selectedHour))
-						.append(":").append(pad(selectedminute)).toString();
+				BaseAlarmDetails.getSingletonInstance().setHasUserChangedTime(true);
+				 selectedHour = hourOfDay;
+				 selectedminute = minute;
+				
 				
 			}
 		});
@@ -48,11 +55,12 @@ public class NormalAlarmFragment extends BaseAlarmFragment {
 
 	public void onSaveClicked(View view){	
 		
-		if(!"".equals(time))
+		if(BaseAlarmDetails.getSingletonInstance().isHasUserChangedTime())
 		{
 			NormalAlarmInformation alarmInformation = new NormalAlarmInformation();
-			alarmInformation.setTime(time);
-			
+			alarmInformation.setHours(selectedHour);
+			alarmInformation.setMin(selectedminute);
+			scheduleAlarm(selectedHour,selectedminute);
 			BaseAlarmDetails.getSingletonInstance().getDetails().getNormalAlarmInformation().add(alarmInformation);
 			saveData(BaseAlarmDetails.getSingletonInstance().getDetails());
 			
@@ -61,6 +69,26 @@ public class NormalAlarmFragment extends BaseAlarmFragment {
 		}
 	}
 	
+	
+	public void scheduleAlarm(int selectedHour, int selectedminute){
+		Calendar cal = Calendar.getInstance();
+	    cal.set(Calendar.HOUR_OF_DAY, selectedHour);
+	    cal.set(Calendar.MINUTE, selectedminute);
+	    cal.set(Calendar.SECOND, 0);
+
+	    //in case of choosing a previous hour, then set alarm to next day
+	    if (cal.getTimeInMillis() < System.currentTimeMillis()){
+	        cal.set(Calendar.HOUR_OF_DAY, selectedHour + 24);
+	    }
+        Intent intentAlarm= new Intent(getActivity(), AlarmReceiver.class);
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(getActivity(), 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+       
+    }
+ 
+
+
+
 	
 	public void setCurrentTimeOnView() {
 		final Calendar c = Calendar.getInstance();
@@ -72,12 +100,7 @@ public class NormalAlarmFragment extends BaseAlarmFragment {
 	}
 	
 	 
-	private static String pad(int c) {
-		if (c >= 10)
-		   return String.valueOf(c);
-		else
-		   return "0" + String.valueOf(c);
-	}
+	
 }
  
 

@@ -10,6 +10,7 @@ public class GpsAlarmInformation  {
 	private String location="";
 	private double latitude;
 	private double longitutes;
+	private String id ="";
 	 private static final long GEOFENCE_EXPIRATION_IN_HOURS = 12;
 	    private static final long GEOFENCE_EXPIRATION_IN_MILLISECONDS =
 	            GEOFENCE_EXPIRATION_IN_HOURS * DateUtils.HOUR_IN_MILLIS;
@@ -48,7 +49,7 @@ public class GpsAlarmInformation  {
 	
 	 public Geofence toGeofence() {
 	        // Build a new Geofence object
-	        return new Geofence.Builder()
+	        return new Geofence.Builder().setRequestId(getId()).setTransitionTypes( Geofence.GEOFENCE_TRANSITION_ENTER)
 	                       .setCircularRegion(
 	                               getLatitude(),
 	                               getLongitutes(),
@@ -57,4 +58,13 @@ public class GpsAlarmInformation  {
 	                       .build();
 	    }
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 }

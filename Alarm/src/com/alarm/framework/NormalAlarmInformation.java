@@ -3,14 +3,24 @@ package com.alarm.framework;
 
 public class NormalAlarmInformation {
 	
-	private String time ="";
+	private int hours ;
+	private int min;
 
-	public String getTime() {
-		return time;
+	
+	public int getHours() {
+		return hours;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+
+	public int getMin() {
+		return min;
+	}
+
+	public void setMin(int min) {
+		this.min = min;
 	}
 
 }

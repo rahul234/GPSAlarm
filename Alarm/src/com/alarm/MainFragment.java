@@ -34,4 +34,11 @@ public class MainFragment extends BaseAlarmFragment {
 		normalAlarmList.setAdapter(new NormalAlarmAdapter(getActivity(), getDetails().getNormalAlarmInformation()));
 	}
 
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		gpsAlarmList.setAdapter(new GPSAlramAdapter(getActivity(), getDetails().getGpsAlarmInformation()));
+		normalAlarmList.setAdapter(new NormalAlarmAdapter(getActivity(), getDetails().getNormalAlarmInformation()));
+	}
 }

@@ -1,6 +1,8 @@
 package com.alarm;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -276,16 +278,26 @@ public class GpsAlarmActivity extends BaseAlarmActivity {
         }
     }
 	
+	public final class SessionIdentifierGenerator {
+		  private SecureRandom random = new SecureRandom();
+
+		  public String nextSessionId() {
+		    return new BigInteger(130, random).toString(32);
+		  }
+		}
+	
 	public void onSaveClicked(View view){	
 		String distance = loactionDistace.getText().toString();
 		String location = loactionDetails.getText().toString();
 		if(!"".equals(distance) && !"".equals(location))
 		{
+			
 			GpsAlarmInformation gpsAlarm = new GpsAlarmInformation();
 			gpsAlarm.setDistance(distance);
 			gpsAlarm.setLocation(location);
 			gpsAlarm.setLatitude(longit);
 			gpsAlarm.setLongitutes(longit);
+			gpsAlarm.setId(new SessionIdentifierGenerator().nextSessionId());
 			BaseAlarmDetails.getSingletonInstance().getDetails().getGpsAlarmInformation().add(gpsAlarm);
 			saveData(BaseAlarmDetails.getSingletonInstance().getDetails());
 			  /*
@@ -312,12 +324,12 @@ public class GpsAlarmActivity extends BaseAlarmActivity {
 	         * Create a version of geofence 1 that is "flattened" into individual fields. This
 	         * allows it to be stored in SharedPreferences.
 	         */
-	        UIGeofence = new SimpleGeofence("1",lat,longit,
+	        UIGeofence = new SimpleGeofence(gpsAlarm.getId(),lat,longit,
 	            Float.valueOf(distance),
 	            // Set the expiration time
 	            GEOFENCE_EXPIRATION_IN_MILLISECONDS,
-	            // Only detect entry transitions
-	            Geofence.GEOFENCE_TRANSITION_ENTER);
+	         // Detect only entry
+	            Geofence.GEOFENCE_TRANSITION_ENTER );
 	        /*
 	         * Add Geofence objects to a List. toGeofence()
 	         * creates a Location Services Geofence object from a

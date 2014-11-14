@@ -24,7 +24,17 @@ public abstract class BaseAlarmActivity extends FragmentActivity {
 		String json = gson.toJson(details);
 		prefsEditor.putString("AlarmDetails", json);
 		prefsEditor.commit();
+		goHome();
+	}
+
+
+	private void goHome() {
 		Intent i = new Intent(this, MainActivity.class);
 		startActivity(i);
+	}
+	
+	
+	public void onHomeCLicked(View view){
+		goHome();
 	}
 }

@@ -9,6 +9,7 @@
         android:id="@+id/alarmImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onHomeCLicked"
         android:src="@drawable/alarm_clock_arrow" />
 
     <LinearLayout
