@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/headerColor"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/alarmname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="10dp"
+            android:text="@string/createAlarm"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/addButtonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:onClick="onNormalAlarmClicked"
+            android:padding="10dp"
+            android:src="@drawable/ic_action_new_white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <com.alarm.framework.ScrollableListView
+            android:id="@+id/normalAlarmList"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/headerColor"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/gpsAlrmname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="10dp"
+            android:text="@string/createGpsAlarm"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/addGpsButtonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:onClick="onGpsAlarmClicked"
+            android:padding="10dp"
+            android:src="@drawable/ic_action_new_white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <com.alarm.framework.ScrollableListView
+            android:id="@+id/gpsAlarmList"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+
+</LinearLayout>

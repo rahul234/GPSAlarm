@@ -2,9 +2,9 @@ package com.alarm;
 
 import java.util.Calendar;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,8 +22,7 @@ public class NormalAlarmFragment extends BaseAlarmFragment {
 	
 	private TimePicker timePicker;
 	private int hour;
-	private int minute;
-	private String time="";
+	private int minute;	
 	protected int selectedHour;
 	protected int selectedminute;
 	
@@ -72,20 +71,30 @@ public class NormalAlarmFragment extends BaseAlarmFragment {
 	
 	public void scheduleAlarm(int selectedHour, int selectedminute){
 		Calendar cal = Calendar.getInstance();
-	    cal.set(Calendar.HOUR_OF_DAY, selectedHour);
-	    cal.set(Calendar.MINUTE, selectedminute);
-	    cal.set(Calendar.SECOND, 0);
+        cal.add(Calendar.SECOND, 5);
+	   /* cal.add(Calendar.HOUR_OF_DAY, selectedHour);
+	    cal.add(Calendar.MINUTE, selectedminute);
+	    cal.add(Calendar.SECOND, 0);
 
 	    //in case of choosing a previous hour, then set alarm to next day
-	    if (cal.getTimeInMillis() < System.currentTimeMillis()){
+	    if (System.currentTimeMillis() < cal.getTimeInMillis()){
 	        cal.set(Calendar.HOUR_OF_DAY, selectedHour + 24);
 	    }
-        Intent intentAlarm= new Intent(getActivity(), AlarmReceiver.class);
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(getActivity(), 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+	    
+	  //  long diff = cal.getTime().getTime() - System.currentTimeMillis();
+*/	    
+        Intent intent = new Intent(getActivity(), AlarmReceiverActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(),
+            12345, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = 
+            (AlarmManager)getActivity().getSystemService(Activity.ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                pendingIntent);
        
     }
  
+	
+	
 
 
 
