@@ -47,12 +47,21 @@
             </ImageView>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/range"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loactionLayout"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:text="@string/range"
+            android:textColor="@android:color/white" />
+
         <EditText
             android:id="@+id/loactionDistace"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/title"
-            android:layout_below="@+id/loactionLayout"
+            android:layout_below="@+id/range"
             android:background="@drawable/edittext_custom"
             android:inputType="number"
             android:textColor="@android:color/white" />

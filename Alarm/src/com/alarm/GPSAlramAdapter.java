@@ -3,6 +3,7 @@ package com.alarm;
 import java.util.List;
 
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -35,6 +36,17 @@ public class GPSAlramAdapter extends BaseAdapter{
 		return position;
 	}
 	
+	@Override
+	public void registerDataSetObserver(DataSetObserver observer) {
+		super.registerDataSetObserver(observer);
+	}
+
+	@Override
+	public void notifyDataSetChanged() {
+		super.notifyDataSetChanged();
+	}
+	
+
 	
 
 	@Override
@@ -42,6 +54,7 @@ public class GPSAlramAdapter extends BaseAdapter{
 		if(convertView== null){
 			convertView = activity.getLayoutInflater().inflate(R.layout.gps_list_item, parent, false);
 		}
+		convertView.setTag(information.get(position));
 		TextView distance = (TextView) convertView.findViewById(R.id.distance);
 		TextView loction = (TextView) convertView.findViewById(R.id.loction);
 		distance.setText(information.get(position).getDistance() + " " + "Km");

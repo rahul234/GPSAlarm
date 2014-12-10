@@ -3,6 +3,7 @@ package com.alarm;
 import java.util.List;
 
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -42,6 +43,15 @@ public class NormalAlarmAdapter extends BaseAdapter{
 		   return "0" + String.valueOf(c);
 	}
 	
+	@Override
+	public void registerDataSetObserver(DataSetObserver observer) {
+		super.registerDataSetObserver(observer);
+	}
+
+	@Override
+	public void notifyDataSetChanged() {
+		super.notifyDataSetChanged();
+	}
 	
 
 	@Override
@@ -49,6 +59,7 @@ public class NormalAlarmAdapter extends BaseAdapter{
 		if(convertView== null){
 			convertView = activity.getLayoutInflater().inflate(R.layout.normal_alarm_item, parent, false);
 		}
+		convertView.setTag(information.get(position));
 		TextView time = (TextView) convertView.findViewById(R.id.time);
 		String alarmTime = new StringBuilder().append(pad(information.get(position).getHours()))
 				.append(":").append(pad(information.get(position).getMin())).toString();

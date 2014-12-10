@@ -21,59 +21,6 @@
         android:layout_height="fill_parent"
         android:background="@android:color/black"
         android:padding="@dimen/large_margin" >
-
-        <TextView
-            android:id="@+id/alarmType"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="@string/alarmType"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/melody"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/alarmType"
-            android:text="@string/melody"
-            android:textColor="#1083b8" />
-
-        <View
-            android:id="@+id/divider1"
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/melody"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/dividerColor" />
-
-        <TextView
-            android:id="@+id/alarmTone"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/divider1"
-            android:text="@string/alarmTone"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/alarmSound"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/alarmTone"
-            android:text="@string/melody"
-            android:textColor="#1083b8" />
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/alarmSound"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/dividerColor" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alarm.framework.AlarmDetails;
 import com.alarm.framework.BaseAlarmDetails;
 import com.alarm.framework.GeofenceUtils;
 import com.alarm.framework.GeofenceUtils.REMOVE_TYPE;
@@ -50,6 +51,7 @@ public class GpsAlarmActivity extends BaseAlarmActivity {
 	private EditText loactionDetails;
 	private GoogleMap map;
 	private TextView loactionDistace;
+	private int position;
 	 // Store the current request
     private REQUEST_TYPE mRequestType;
     private SimpleGeofence UIGeofence;
@@ -105,7 +107,6 @@ public class GpsAlarmActivity extends BaseAlarmActivity {
          */
         @Override
         public void onReceive(Context context, Intent intent) {
-        	Toast.makeText(getApplicationContext(), "RecGeofence:"+intent.getAction(), Toast.LENGTH_LONG).show();
             // Check the action code and determine what to do
             String action = intent.getAction();
 
@@ -218,6 +219,17 @@ public class GpsAlarmActivity extends BaseAlarmActivity {
 		setContentView(R.layout.gps_alarm_activity);
 		loactionDetails = (EditText) findViewById(R.id.loactionDetails);
 		loactionDistace = (TextView) findViewById(R.id.loactionDistace);
+		if(getIntent().getExtras() != null){
+			String loc = getIntent().getExtras().getString("Location", "");
+	    	String dist = getIntent().getExtras().getString("Distance", "");
+	    	position = getIntent().getExtras().getInt("Position");
+	    	loactionDetails.setText(loc);
+	    	loactionDistace.setText(dist);
+		}
+		
+		
+    	
+		
 		  mBroadcastReceiver = new GeofenceSampleReceiver();
 
 	        // Create an intent filter for the broadcast receiver
@@ -244,6 +256,8 @@ public class GpsAlarmActivity extends BaseAlarmActivity {
 	        // Instantiate a Geofence requester
 	        mGeofenceRequester = new GeofenceRequester(this);
 	        mGeofenceRemover = new GeofenceRemover(this);
+	        
+	       
 
 
 	}
@@ -324,12 +338,17 @@ public class GpsAlarmActivity extends BaseAlarmActivity {
 		    return new BigInteger(130, random).toString(32);
 		  }
 		}
+	private AlarmDetails getDetails() {
+		return BaseAlarmDetails.getSingletonInstance().getDetails();
+	}
 	
 	public void onSaveClicked(View view){	
 		String distance = loactionDistace.getText().toString();
 		String location = loactionDetails.getText().toString();
-		if(!"".equals(distance) && !"".equals(location))
+		if(!"".equals(distance) && !"".equals(location) && !"0".equals(distance))
 		{
+			getDetails().getGpsAlarmInformation().remove(position);
+			saveData(getDetails());
 			
 			GpsAlarmInformation gpsAlarm = new GpsAlarmInformation();
 			gpsAlarm.setDistance(distance);
